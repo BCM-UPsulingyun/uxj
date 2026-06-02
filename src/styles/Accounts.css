@@ -1,0 +1,393 @@
+/* src/styles/Accounts.css */
+
+.accounts-container {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 20px;
+  color: var(--text-color);
+  font-family: var(--font-family);
+}
+
+/* 头部与筛选 */
+.app-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  color: var(--text-color);
+}
+
+.month-selector input {
+  padding: 6px 12px;
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  font-size: 1rem;
+  color: var(--text-color);
+  background: var(--glass-bg);
+  outline: none;
+  transition: border-color 0.3s ease;
+}
+
+.month-selector input:focus {
+  border-color: var(--primary-color);
+}
+
+/* 统计概览卡片 */
+.stats-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  gap: 15px;
+  margin-bottom: 25px;
+}
+
+.stat-card {
+  /* 使用全局毛玻璃变量，自动适配明暗主题 */
+  background: var(--glass-bg);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: var(--shadow);
+  border: 1px solid var(--glass-border);
+  text-align: center;
+  transition: background-color 0.3s ease;
+}
+
+.stat-card h4 {
+  margin: 0 0 8px 0;
+  font-size: 0.9rem;
+  color: var(--text-color);
+  opacity: 0.7;
+}
+
+.stat-card h2, .stat-card p {
+  margin: 0;
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: var(--text-color);
+}
+
+.text-green { color: #4caf50; }
+.text-red { color: #ef4444; }
+
+/* 主内容布局 */
+.main-content {
+  display: grid;
+  grid-template-columns: 1fr 1.5fr;
+  gap: 25px;
+}
+
+/* 通用卡片样式 */
+.card, .form-section {
+  background: var(--glass-bg);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  padding: 25px;
+  border-radius: 12px;
+  box-shadow: var(--shadow);
+  border: 1px solid var(--glass-border);
+  transition: background-color 0.3s ease;
+}
+
+h3 {
+  margin-top: 0;
+  border-bottom: 1px solid var(--border-color);
+  padding-bottom: 12px;
+  margin-bottom: 20px;
+  font-size: 1.1rem;
+  color: var(--text-color);
+}
+
+/* 表单样式 */
+.toggle-group {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.toggle-group button {
+  flex: 1;
+  padding: 10px;
+  border: 1px solid var(--border-color);
+  background: var(--card-bg);
+  color: var(--text-color);
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.2s ease;
+}
+
+.toggle-group button.active {
+  background: var(--primary-color);
+  color: #fff;
+  border-color: var(--primary-color);
+}
+
+.form-group { margin-bottom: 15px; }
+
+.form-group label {
+  display: block;
+  margin-bottom: 6px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--text-color);
+  opacity: 0.8;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  box-sizing: border-box;
+  background: var(--card-bg);
+  color: var(--text-color);
+  outline: none;
+  transition: border-color 0.3s ease;
+}
+
+.form-group input:focus {
+  border-color: var(--primary-color);
+}
+
+/* 分类选择网格 */
+.category-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+}
+
+.category-grid button {
+  padding: 8px;
+  font-size: 0.85rem;
+  border: 1px solid var(--border-color);
+  background: var(--card-bg);
+  color: var(--text-color);
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.category-grid button.selected {
+  background: var(--primary-color);
+  color: #fff;
+  border-color: var(--primary-color);
+  font-weight: bold;
+}
+
+.btn-submit {
+  width: 100%;
+  padding: 12px;
+  background: var(--primary-color);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  margin-top: 10px;
+  transition: filter 0.2s ease;
+}
+
+.btn-submit:hover {
+  filter: brightness(0.9);
+}
+
+/* 纯 CSS 统计图表 */
+.css-bar-chart { display: flex; flex-direction: column; gap: 15px; }
+.bar-row { display: flex; align-items: center; font-size: 0.9rem; color: var(--text-color); }
+.bar-label { width: 70px; font-weight: 500; }
+.bar-track {
+  flex: 1;
+  height: 24px;
+  background: var(--border-color);
+  border-radius: 12px;
+  overflow: hidden;
+  opacity: 0.5;
+}
+.bar-fill {
+  height: 100%;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding-right: 10px;
+  color: white;
+  font-size: 0.75rem;
+  font-weight: bold;
+  box-sizing: border-box;
+  transition: width 0.5s ease;
+  min-width: 40px;
+  background: var(--primary-color);
+}
+.empty-chart {
+  text-align: center;
+  color: var(--text-color);
+  opacity: 0.5;
+  padding: 20px;
+  font-style: italic;
+}
+
+/* ==================== 交易列表 & 删除按钮 ==================== */
+.transaction-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+.list-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--border-color);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.list-item.deleting {
+  opacity: 0.35;
+  text-decoration: line-through;
+  pointer-events: none;
+}
+
+.item-date {
+  font-size: 0.75rem;
+  color: var(--text-color);
+  opacity: 0.5;
+  display: block;
+  margin-bottom: 4px;
+}
+.item-text { font-weight: 500; display: block; color: var(--text-color); }
+.item-cat { font-size: 0.75rem; font-weight: bold; color: var(--primary-color); }
+.item-action { display: flex; align-items: center; gap: 15px; }
+.amount-plus { color: #4caf50; font-weight: bold; }
+.amount-minus { color: #ef4444; font-weight: bold; }
+
+.del-btn {
+  background: none;
+  border: none;
+  color: var(--text-color);
+  opacity: 0.4;
+  font-size: 1.4rem;
+  cursor: pointer;
+  min-width: 36px;
+  min-height: 36px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  transition: all 0.2s ease;
+  line-height: 1;
+}
+
+.del-btn:hover {
+  color: #ef4444;
+  opacity: 1;
+  background-color: rgba(239, 68, 68, 0.08);
+}
+
+.del-btn:active { transform: scale(0.92); }
+
+.empty-state {
+  text-align: center;
+  color: var(--text-color);
+  opacity: 0.5;
+  padding: 20px;
+  list-style: none;
+}
+
+/* --- 自定义 Toast 提示框样式 --- */
+.custom-toast {
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: var(--primary-color);
+  color: white;
+  padding: 12px 24px;
+  border-radius: 50px;
+  box-shadow: var(--shadow);
+  font-size: 0.95rem;
+  z-index: 2000;
+  animation: slideDown 0.3s ease-out;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.undo-btn {
+  background: rgba(255,255,255,0.2);
+  border: 1px solid rgba(255,255,255,0.4);
+  color: white;
+  padding: 4px 14px;
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: 0.8rem;
+  font-weight: 600;
+  transition: background 0.2s;
+}
+.undo-btn:hover { background: rgba(255,255,255,0.35); }
+
+@keyframes slideDown {
+  from { top: -50px; opacity: 0; }
+  to { top: 20px; opacity: 1; }
+}
+
+/* --- 自定义确认弹窗样式 --- */
+.custom-modal-overlay {
+  position: fixed;
+  top: 0; left: 0; width: 100%; height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2000;
+  animation: fadeIn 0.2s ease-out;
+}
+
+.custom-modal {
+  /* 弹窗背景使用卡片变量，自动适配明暗主题 */
+  background: var(--card-bg);
+  padding: 25px;
+  border-radius: 12px;
+  width: 90%;
+  max-width: 320px;
+  box-shadow: var(--shadow);
+  text-align: center;
+  animation: scaleIn 0.2s ease-out;
+  border: 1px solid var(--glass-border);
+}
+
+.modal-content {
+  font-size: 1.1rem;
+  color: var(--text-color);
+  margin-bottom: 20px;
+  font-weight: 500;
+}
+
+.modal-actions { display: flex; gap: 12px; justify-content: center; }
+
+.modal-btn {
+  flex: 1; padding: 10px 0; border: none; border-radius: 8px;
+  font-size: 0.95rem; cursor: pointer; font-weight: 600; transition: opacity 0.2s;
+}
+.modal-btn.cancel {
+  background-color: var(--border-color);
+  color: var(--text-color);
+}
+.modal-btn.confirm {
+  background-color: var(--primary-color);
+  color: white;
+}
+.modal-btn:hover { opacity: 0.85; }
+
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+@keyframes scaleIn { from { transform: scale(0.9); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+
+/* 手机端适配 */
+@media (max-width: 768px) {
+  .stats-grid { grid-template-columns: 1fr; }
+  .main-content { grid-template-columns: 1fr; }
+}

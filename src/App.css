@@ -1,0 +1,309 @@
+/* 
+   默认主题 - 浅草物语 (清爽绿) 
+*/
+:root {
+  --primary-color: #4caf50;
+  --secondary-color: #8bc34a;
+  --bg-color: #f1f8e9;
+  --text-color: #2e7d32;
+  --text-muted: #6b8c6b; 
+  --card-bg: #ffffff;
+  --border-color: #c8e6c9;
+  --border-radius: 0px;
+  --font-family: 'Comic Sans MS', cursive;
+  --glass-bg: rgba(255, 255, 255, 0.65);
+  --glass-border: rgba(255, 255, 255, 0.4);
+  --sidebar-bg: rgba(255, 255, 255, 0.85);
+  --shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
+  --bg-image: url('/src/assets/bg1.png');
+}
+
+/* 云落深汀 (深邃蓝/灰) */
+.theme-yunluo {
+  --primary-color: #64b5f6;
+  --secondary-color: #90caf9;
+  --bg-color: #263238;
+  --text-color: #7399b0;
+   --text-muted: #546e7a;
+  --card-bg: #37474f;
+  --border-color: #455a64;
+  --glass-bg: rgba(255, 255, 255, 0.65);
+  --glass-border: rgba(255, 255, 255, 0.1);
+  --sidebar-bg: rgba(255, 255, 255, 0.85);
+  --shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+  --bg-image: url('/src/assets/bg2.png');
+}
+
+/* 樱吹雪时 (樱花粉) */
+.theme-yingchui {
+  --primary-color: #ec407a;
+  --secondary-color: #f48fb1;
+  --bg-color: #fce4ec;
+  --text-color: #880e4f;
+  --text-muted: #a06070; 
+  --card-bg: #ffffff;
+  --border-color: #f8bbd0;
+  --glass-bg: rgba(255, 255, 255, 0.65);
+  --glass-border: rgba(255, 255, 255, 0.4);
+  --sidebar-bg: rgba(255, 255, 255, 0.85);
+  --bg-image: url('/src/assets/bg3.png');
+}
+
+/* 月白无尘 (极简白/淡蓝) */
+.theme-yuebai {
+  --primary-color: #29b6f6;
+  --secondary-color: #b3e5fc;
+  --bg-color: #ffffff;
+  --text-color: #37474f;
+  --text-muted: #6a5070; 
+  --card-bg: #e1f5fe;
+  --border-color: #b3e5fc;
+  --glass-bg: rgba(255, 255, 255, 0.65);
+  --glass-border: rgba(255, 255, 255, 0.4);
+  --sidebar-bg: rgba(255, 255, 255, 0.85);
+  --bg-image: url('/src/assets/bg4.png');
+}
+
+/* 夜泊星野 (暗黑紫) */
+.theme-yepo {
+  --primary-color: #ab47bc;
+  --secondary-color: #7e57c2;
+  --bg-color: #1a1a2e;
+  --text-color: #8d6e92;
+  --text-muted: #6a5070;  
+  --card-bg: #16213e;
+  --border-color: #0f3460;
+  --glass-bg: rgba(255, 255, 255, 0.65);
+  --glass-border: rgba(255, 255, 255, 0.4);
+  --sidebar-bg: rgba(255, 255, 255, 0.85);
+  --bg-image: url('/src/assets/bg5.png');
+}
+
+/* 橘色黄昏 (暖橙) */
+.theme-juse {
+  --primary-color: #ff7043;
+  --secondary-color: #ffcc80;
+  --bg-color: #fff3e0;
+  --text-color: #bf360c;
+  --text-muted: #a07060;
+  --card-bg: #ffffff;
+  --border-color: #ffe0b2;
+  --glass-bg: rgba(255, 255, 255, 0.65);
+  --glass-border: rgba(255, 255, 255, 0.4);
+  --sidebar-bg: rgba(255, 255, 255, 0.85);
+  --bg-image: url('/src/assets/bg6.png');
+}
+
+/* =========================================
+   全局基础设置 & 动态背景逻辑
+   ========================================= */
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: var(--font-family);
+  color: var(--text-color);
+  min-height: 100vh;
+  overflow: hidden;
+}
+
+.app-wrapper {
+  display: flex;
+  width: 100vw;
+  height: 100vh;
+  
+  background-color: var(--bg-color);
+  background-image: var(--bg-image);
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  
+  transition: background-color 0.5s ease, background-image 0.5s ease;
+}
+
+/* 通用毛玻璃类 */
+.glass-panel {
+  background: var(--glass-bg);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: var(--shadow);
+  border-radius: 0px;
+  border: none;
+}
+
+/* =========================================
+   核心布局：Flexbox 弹性盒子
+   ========================================= */
+
+
+/* --- 左侧导航栏 --- */
+.sidebar {
+  height: 100%;
+  width: 260px;
+  flex-shrink: 0;
+  background: var(--sidebar-bg) !important; 
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  border-right: 1px solid var(--border-color);
+  transition: width 0.3s ease;
+  overflow: hidden;
+  z-index: 1000;
+}
+
+.sidebar.collapsed {
+  width: 95px;
+}
+
+.sidebar-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 60px;
+  padding-top: env(safe-area-inset-top);
+}
+
+.sidebar-header h2 {
+  margin: 0;
+  font-size: 1.4rem;
+  font-weight: 800;
+  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  white-space: nowrap;
+  opacity: 1;
+  transition: opacity 0.2s;
+}
+
+.sidebar.collapsed .sidebar-header h2 {
+  opacity: 0;
+  width: 0;
+  display: none;
+}
+
+.collapse-btn {
+  background: transparent;
+  border: 1px solid var(--border-color);
+  cursor: pointer;
+  color: var(--text-color);
+  padding: 6px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+  flex-shrink: 0;
+}
+
+.collapse-btn:hover {
+  background: var(--primary-color);
+  color: white;
+  border-color: var(--primary-color);
+  transform: scale(1.1);
+}
+
+.nav-links {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  overflow-y: auto;
+}
+
+.nav-link {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 12px 16px;
+  text-decoration: none;
+  color: var(--text-color);
+  transition: all 0.2s;
+  font-weight: 500;
+  white-space: nowrap;
+  border-radius: 0px;
+}
+
+.nav-link:hover {
+  background-color: var(--glass-bg);
+  color: var(--primary-color);
+}
+
+.nav-link.active {
+  background-color: var(--primary-color);
+  color: #fff;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.sidebar-footer {
+  margin-top: 20px;
+  border-top: 1px solid var(--border-color);
+  padding-top: 20px;
+}
+
+.logout-link {
+  border: 1px solid #000000 !important; 
+  color: var(--text-color);
+  opacity: 0.8;
+}
+
+.logout-link:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  color: #000000;
+  opacity: 1;
+}
+
+/* =========================================
+    右侧内容区：样式隔离与自适应
+   ========================================= */
+
+.page-container {
+  flex: 1;
+  height: 100%;
+  padding: 30px 40px;
+  overflow-y: auto;
+  background: transparent;
+  transition: all 0.3s ease;
+}
+
+/* =========================================
+    移动端适配
+   ========================================= */
+
+@media (max-width: 768px) {
+  .app-wrapper {
+    position: relative;
+    overflow-x: hidden;
+  }
+
+  .sidebar {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 260px;
+    height: 100vh;
+    transform: translateX(-100%);
+    box-shadow: 2px 0 10px rgba(0,0,0,0.1);
+  }
+
+  .sidebar:not(.collapsed) {
+    transform: translateX(0);
+  }
+
+  .sidebar.collapsed {
+    width: 260px;
+  }
+
+  .page-container {
+    width: 100%;
+    padding: 20px;
+    margin-left: 0;
+  }
+}
