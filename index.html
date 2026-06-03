@@ -2,24 +2,23 @@
 <html lang="zh-CN">
   <head>
     <meta charset="UTF-8" />
-    
-    <!-- 移动端适配：禁止缩放，适配刘海屏/灵动岛 -->
+
+    <!-- 移动端适配 -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
 
     <title>unfold·星境</title>
 
-    <!-- 网站图标 -->
-    <link rel="icon" type="image/png" href="/unfold/assets/icon-B8OKnN8E-B8OKnN8E.png" />
+    <!-- 直接指向源码目录下的图片 -->
+    <link rel="icon" type="image/png" href="/src/assets/icon.png" />
 
     <meta name="description" content="unfold·星境" />
-    <script type="module" crossorigin src="/unfold/assets/index-D5p3K_wf.js"></script>
-    <link rel="stylesheet" crossorigin href="/unfold/assets/index-CojP5_Zl.css">
   </head>
-  
+
   <body>
     <!-- React 根节点 -->
     <div id="root"></div>
-    
-    <!-- 入口文件 -->
+
+    <!-- 指向 main.jsx，这是正确的 -->
+    <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>

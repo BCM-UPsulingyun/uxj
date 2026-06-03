@@ -1,8 +1,7 @@
 import React, { useState, createContext, useEffect } from 'react'
 import ReactDOM from 'react-dom/client'
 import App from './App.jsx'
-// 将 BrowserRouter 改为 HashRouter
-import { HashRouter } from 'react-router-dom'
+import { BrowserRouter } from 'react-router-dom'
 
 // 全局样式引入
 import './App.css'
@@ -55,11 +54,10 @@ export const ThemeContextProvider = ({ children }) => {
 // 渲染根组件
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    {/*  这里也要改成 HashRouter */}
-    <HashRouter>
+    <BrowserRouter>
       <ThemeContextProvider>
         <App />
       </ThemeContextProvider>
-    </HashRouter>
+    </BrowserRouter>
   </React.StrictMode>
 )

@@ -1,9 +1,17 @@
 import React, { useState, useContext } from 'react'
-import { Routes, Route, Link, useLocation, useNavigate, Navigate } from 'react-router-dom'
-import { 
-  Home as HomeIcon, BookOpen, Shirt, 
+import {
+  Routes,
+  Route,
+  Link,
+  useLocation,
+  useNavigate,
+  Navigate,
+  Outlet // 引入 Outlet 用于渲染子路由
+} from 'react-router-dom'
+import {
+  Home as HomeIcon, BookOpen, Shirt,
   Calendar, PieChart, Settings, LogOut, GraduationCap, Heart,
-  ChevronLeft, ChevronRight  
+  ChevronLeft, ChevronRight
 } from 'lucide-react'
 
 // 引入 ThemeContext
@@ -12,33 +20,34 @@ import { ThemeContext } from './main'
 // 导入所有页面组件
 import LoginPage from './pages/LoginPage'
 import Home from './pages/Home'
-import Curriculum from './pages/Curriculum' 
-import Diary from './pages/Diary'          
-import Hobby from './pages/Hobby'           
-import Outfit from './pages/Outfit'        
-import Plan from './pages/Plan'            
+import Curriculum from './pages/Curriculum'
+import Diary from './pages/Diary'
+import Hobby from './pages/Hobby'
+import Outfit from './pages/Outfit'
+import Plan from './pages/Plan'
 import SettingsPage from './pages/Settings'
-import Accounts from './pages/Accounts'    
+import Accounts from './pages/Accounts'
 
 import './App.css'
 
-// 路由守卫组件 
-const ProtectedRoute = ({ children }) => {
+// 路由守卫组件（作为布局路由使用）
+const ProtectedRoute = () => {
   const isLogin = localStorage.getItem('isLogin') === 'true'
   if (!isLogin) {
     return <Navigate to="/login" replace />
   }
-  return children
+  // 必须渲染 Outlet，否则子页面无法显示
+  return <Outlet />
 }
 
-//  侧边栏组件 
-const Sidebar = ({ isCollapsed, toggleSidebar }) => { 
+// 侧边栏组件
+const Sidebar = ({ isCollapsed, toggleSidebar }) => {
   const location = useLocation()
   const navigate = useNavigate()
-  
+
   // 在侧边栏中也使用 Context (用于退出登录重置主题)
   const { setTheme } = useContext(ThemeContext)
-  
+
   // 导航菜单配置
   const navItems = [
     { path: '/app/', label: '首页', icon: <HomeIcon size={20} /> },
@@ -81,7 +90,7 @@ const Sidebar = ({ isCollapsed, toggleSidebar }) => {
       </nav>
 
       <div className="sidebar-footer">
-         <button className="nav-link logout-link" onClick={handleLogout}>
+        <button className="nav-link logout-link" onClick={handleLogout}>
           <LogOut size={20} />
           {!isCollapsed && <span>退出登录</span>}
         </button>
@@ -90,11 +99,11 @@ const Sidebar = ({ isCollapsed, toggleSidebar }) => {
   )
 }
 
-// 核心应用布局与路由 
+// 核心应用布局与路由
 function App() {
-  //  订阅 ThemeContext 以获取当前主题类名
+  // 订阅 ThemeContext 以获取当前主题类名
   const { theme } = useContext(ThemeContext)
-  
+
   const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false)
   const toggleSidebar = () => setIsSidebarCollapsed(!isSidebarCollapsed)
 
@@ -102,41 +111,39 @@ function App() {
   const isLoginPage = location.pathname === '/login'
 
   return (
-    //  将 theme 变量作为 className 绑定到最外层
-    // 这样背景图样式会应用在这里，而 LoginPage 会通过 fixed 定位覆盖它
+    // 将 theme 变量作为 className 绑定到最外层
     <div className={`app-wrapper ${theme}`}>
-      
+      {/* 登录页不显示侧边栏 */}
       {!isLoginPage && (
         <Sidebar isCollapsed={isSidebarCollapsed} toggleSidebar={toggleSidebar} />
       )}
 
       <main className={`page-container ${isSidebarCollapsed ? 'expanded' : ''}`}>
         <Routes>
+          {/* 登录页路由 */}
           <Route path="/login" element={<LoginPage />} />
-          
-          <Route 
-            path="/" 
+
+          {/* 根路径重定向逻辑优化 */}
+          <Route
+            path="/"
             element={
-              localStorage.getItem('isLogin') === 'true' 
-                ? <Navigate to="/app/" replace /> 
+              localStorage.getItem('isLogin') === 'true'
+                ? <Navigate to="/app/" replace />
                 : <Navigate to="/login" replace />
-            } 
+            }
           />
-          
-          <Route path="/app/*" element={
-            <ProtectedRoute>
-              <Routes>
-                <Route path="/" element={<Home />} />
-                <Route path="curriculum" element={<Curriculum />} />
-                <Route path="diary" element={<Diary />} />
-                <Route path="hobby" element={<Hobby />} />
-                <Route path="outfit" element={<Outfit />} />
-                <Route path="plan" element={<Plan />} />
-                <Route path="settings" element={<SettingsPage />} />
-                <Route path="accounts" element={<Accounts />} />
-              </Routes>
-            </ProtectedRoute>
-          } />
+
+          {/* 受保护的路由组：使用 ProtectedRoute 作为父级布局 */}
+          <Route element={<ProtectedRoute />}>
+            <Route path="/app/" element={<Home />} />
+            <Route path="/app/curriculum" element={<Curriculum />} />
+            <Route path="/app/diary" element={<Diary />} />
+            <Route path="/app/hobby" element={<Hobby />} />
+            <Route path="/app/outfit" element={<Outfit />} />
+            <Route path="/app/plan" element={<Plan />} />
+            <Route path="/app/settings" element={<SettingsPage />} />
+            <Route path="/app/accounts" element={<Accounts />} />
+          </Route>
         </Routes>
       </main>
     </div>
